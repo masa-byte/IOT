@@ -1,5 +1,5 @@
 # Microservice Application for IOT 
-This is part one of a project for course **Internet of things and services**
+This is part one of a project for course **Internet of Things and Services**
 <br>
 <br>
 

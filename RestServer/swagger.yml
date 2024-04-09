@@ -1,0 +1,200 @@
+swagger: "2.0"
+info:
+  title: FishPond API
+  version: "1.0"
+basePath: /
+paths:
+  /:
+    get:
+      summary: Get all data
+      tags:
+        - Fish Pond Data
+      responses:
+        "200":
+          description: List of all fish pond data
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/PondData"
+        "500":
+          description: Internal server error
+    post:
+      summary: Add new fish pond data
+      tags:
+        - Fish Pond Data
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/PondData"
+      responses:
+        "201":
+          description: Data added successfully
+          schema:
+            $ref: "#/definitions/DataId"
+        "500":
+          description: Internal server error
+  /{id}:
+    get:
+      summary: Get data by entry ID
+      tags:
+        - Fish Pond Data
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Fish pond data retrieved successfully
+          schema:
+            $ref: "#/definitions/PondData"
+        "404":
+          description: Data not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update data by entry ID
+      tags:
+        - Fish Pond Data
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/PondData"
+      responses:
+        "200":
+          description: Data updated successfully
+          schema:
+            $ref: "#/definitions/PondData"
+        "404":
+          description: Data not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete data by entry ID
+      tags:
+        - Fish Pond Data
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        "204":
+          description: Data deleted successfully
+        "404":
+          description: Data not found
+        "500":
+          description: Internal server error
+  /pond/{id}:
+    get:
+      summary: Get data by fish pond ID
+      tags:
+        - Fish Pond Data
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Fish pond data retrieved successfully
+          schema:
+            $ref: "#/definitions/PondData"
+        "404":
+          description: Data not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete data by fish pond ID
+      tags:
+        - Fish Pond Data
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        "204":
+          description: Data deleted successfully
+        "404":
+          description: Data not found
+        "500":
+          description: Internal server error
+definitions:
+  MultiPondData:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/PondData"
+  MultiAggPondData:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/AggPondData"
+  PondData:
+    type: object
+    properties:
+      pond_id:
+        type: integer
+      created_at:
+        type: string
+        format: date-time
+      entry_id:
+        type: integer
+      temp_c:
+        type: number
+      turbidity_ntu:
+        type: integer
+      dissolved_oxygen_g_ml:
+        type: number
+      ph:
+        type: number
+      ammonia_g_ml:
+        type: number
+      nitrite_g_ml:
+        type: number
+      population:
+        type: integer
+      fish_length_cm:
+        type: number
+      fish_weight_g:
+        type: number
+  AggPondData:
+    type: object
+    properties:
+      pond_id:
+        type: integer
+      property_name:
+        type: string
+      avg_value:
+        type: number
+      sum_value:
+        type: number
+  DataId:
+    type: object
+    properties:
+      id:
+        type: integer
+  DataDateRange:
+    type: object
+    properties:
+      property_name:
+        type: string
+      start_date:
+        type: string
+        format: date-time
+      end_date:
+        type: string
+        format: date-time

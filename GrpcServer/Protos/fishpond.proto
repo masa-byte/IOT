@@ -1,0 +1,63 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "GrpcServer";
+
+package fishpond;
+
+service FishPond {
+    rpc GetAllData (google.protobuf.Empty) returns (MultiPondData) {}
+    rpc GetDataByFishPondId (DataId) returns (MultiPondData) {}
+    rpc GetDataByEntryId (DataId) returns (PondData) {}
+    rpc CreateData (PondData) returns (PondData) {}
+    rpc UpdateData (PondData) returns (PondData) {}
+    rpc DeleteDataByFishPondId (DataId) returns (google.protobuf.Empty) {}
+    rpc DeleteDataByEntryId (DataId) returns (google.protobuf.Empty) {}
+
+    rpc MinDataValuesForDataDateRange (DataDateRange) returns (MultiPondData) {}
+    rpc MaxDataValuesForDataDateRange (DataDateRange) returns (MultiPondData) {}
+    rpc AvgDataValuesForDataDateRange (DataDateRange) returns (MultiAggPondData) {}
+    rpc SumDataValuesForDataDateRange (DataDateRange) returns (MultiAggPondData) {}
+}
+
+message MultiPondData {
+    repeated PondData data = 1;
+}
+
+message MultiAggPondData {
+    repeated AggPondData data = 1;
+}
+
+message PondData {
+    int32 pond_id = 1;
+    google.protobuf.Timestamp created_at = 2;
+    int32 entry_id = 3;
+    float temp_c = 4;
+    int32 turbidity_ntu = 5;
+    float dissolved_oxygen_g_ml = 6;
+    float ph = 7;
+    float ammonia_g_ml = 8;
+    float nitrite_g_ml = 9;
+    int32 population = 10;
+    float fish_length_cm = 11;
+    float fish_weight_g = 12;
+}
+
+message AggPondData {
+    int32 pond_id = 1;
+    string property_name = 2;
+    float avg_value = 3;
+    float sum_value = 4;
+}
+
+message DataId {
+    int32 id = 1;
+}
+
+message DataDateRange {
+    string property_name = 1;
+    google.protobuf.Timestamp start_date = 2;
+    google.protobuf.Timestamp end_date = 3;
+}
+

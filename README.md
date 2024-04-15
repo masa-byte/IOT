@@ -8,7 +8,7 @@ This application is tested through clients like **Postman**, and **Insomnia** an
 <br>
 
 ### Idea
-The idea is to have two microservices which will communicate with each other using gRPC, and one of them will have a REST API. 
+The idea is to have two microservices which will communicate with each other using gRPC, and one of them will have a REST API for communication with client. 
 
 ### Architecture
 The first microservice was written in **.NET Core** and the second one in **Flask**. The first microservice is acting as a gRPC client, and a REST server, and the second one is acting as a gRPC server. The first microservice is responsible for handling the data from the second microservice, and the second microservice is responsible for handling the data from the database.
@@ -29,5 +29,7 @@ It was written in **.NET Core** and **Flask**, and uses **PostgreSQL** as the da
     - `docker-compose up`
 5. Wait for the services to start
 6. Run the import-data.py script to import the data into the database
-7. You can test gRPC server on its own through Postman or Insomnia
+7.1 You can test gRPC server on its own through Postman or Insomnia with url localhost:5117
+7.2 In order to test aggregation functions, use the provided calculate-secoonds.py script to get the seconds for the given time period
 8. To test the REST API, go to http://127.0.0.1:5000/apidocs/
+9. Database GUI is available on http://localhost:5050/ 

@@ -8,7 +8,8 @@ import fishpond_pb2_grpc
 from google.protobuf import empty_pb2, timestamp_pb2
 from google.protobuf.json_format import MessageToDict
 
-# invalid will be depicted with -1
+# invalid will be depicted with max value
+max_value = 2**31 - 1
 
 app = Flask(__name__)
 
@@ -119,23 +120,29 @@ def update_data(id):
     data = request.get_json()
     pondData = fishpond_pb2.PondData()
     pondData.entry_id = id
-    pondData.pond_id = -1 if "pond_id" not in data else data["pond_id"]
-    pondData.temp_c = -1 if "temp_c" not in data else data["temp_c"]
-    pondData.ph = -1 if "ph" not in data else data["ph"]
+    pondData.pond_id = max_value if "pond_id" not in data else data["pond_id"]
+    pondData.temp_c = max_value if "temp_c" not in data else data["temp_c"]
+    pondData.ph = max_value if "ph" not in data else data["ph"]
     pondData.dissolved_oxygen_g_ml = (
-        -1 if "dissolved_oxygen_g_ml" not in data else data["dissolved_oxygen_g_ml"]
+        max_value
+        if "dissolved_oxygen_g_ml" not in data
+        else data["dissolved_oxygen_g_ml"]
     )
-    pondData.ammonia_g_ml = -1 if "ammonia_g_ml" not in data else data["ammonia_g_ml"]
-    pondData.nitrite_g_ml = -1 if "nitrite_g_ml" not in data else data["nitrite_g_ml"]
+    pondData.ammonia_g_ml = (
+        max_value if "ammonia_g_ml" not in data else data["ammonia_g_ml"]
+    )
+    pondData.nitrite_g_ml = (
+        max_value if "nitrite_g_ml" not in data else data["nitrite_g_ml"]
+    )
     pondData.turbidity_ntu = (
-        -1 if "turbidity_ntu" not in data else data["turbidity_ntu"]
+        max_value if "turbidity_ntu" not in data else data["turbidity_ntu"]
     )
-    pondData.population = -1 if "population" not in data else data["population"]
+    pondData.population = max_value if "population" not in data else data["population"]
     pondData.fish_length_cm = (
-        -1 if "fish_length_cm" not in data else data["fish_length_cm"]
+        max_value if "fish_length_cm" not in data else data["fish_length_cm"]
     )
     pondData.fish_weight_g = (
-        -1 if "fish_weight_g" not in data else data["fish_weight_g"]
+        max_value if "fish_weight_g" not in data else data["fish_weight_g"]
     )
 
     try:

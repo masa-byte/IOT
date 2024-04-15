@@ -89,6 +89,7 @@ namespace GrpcServer.Services
 
         public override async Task<PondData> UpdateData(PondData request, ServerCallContext context)
         {
+            int maxValue = System.Int32.MaxValue;
             try
             {
                 Console.WriteLine(request);
@@ -99,25 +100,25 @@ namespace GrpcServer.Services
                     throw new RpcException(new Status(StatusCode.NotFound, "Data not found"));
                 }
 
-                if (request.PondId != -1)
+                if (request.PondId != maxValue)
                     pondData.PondId = request.PondId;
-                if (request.TempC != -1)
+                if (request.TempC != maxValue)
                     pondData.TempC = request.TempC;
-                if (request.Ph != -1)
+                if (request.Ph != maxValue)
                     pondData.Ph = request.Ph;
-                if (request.FishWeightG != -1)
+                if (request.FishWeightG != maxValue)
                     pondData.FishWeightG = request.FishWeightG;
-                if (request.FishLengthCm != -1)
+                if (request.FishLengthCm != maxValue)
                     pondData.FishLengthCm = request.FishLengthCm;
-                if (request.AmmoniaGMl != -1)
+                if (request.AmmoniaGMl != maxValue)
                     pondData.AmmoniaGMl = request.AmmoniaGMl;
-                if (request.NitriteGMl != -1)
+                if (request.NitriteGMl != maxValue)
                     pondData.NitriteGMl = request.NitriteGMl;
-                if (request.DissolvedOxygenGMl != -1)
+                if (request.DissolvedOxygenGMl != maxValue)
                     pondData.DissolvedOxygenGMl = request.DissolvedOxygenGMl;
-                if (request.TurbidityNtu != -1)
+                if (request.TurbidityNtu != maxValue)
                     pondData.TurbidityNtu = request.TurbidityNtu;
-                if (request.Population != -1)
+                if (request.Population != maxValue)
                     pondData.Population = request.Population;
 
                 await Context.SaveChangesAsync();

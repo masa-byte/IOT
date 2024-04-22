@@ -29,7 +29,7 @@ It was written in **.NET Core** and **Flask**, and uses **PostgreSQL** as the da
     - `docker-compose up`
 5. Wait for the services to start
 6. Run the import-data.py script to import the data into the database
-7.1 You can test gRPC server on its own through Postman or Insomnia with url localhost:5117
-7.2 In order to test aggregation functions, use the provided calculate-secoonds.py script to get the seconds for the given time period
-8. To test the REST API, go to http://127.0.0.1:5000/apidocs/
-9. Database GUI is available on http://localhost:5050/ 
+7. You can test gRPC server on its own through Postman or Insomnia with url localhost:5117
+8. In order to test aggregation functions, use the provided calculate-secoonds.py script to get the seconds for the given time period
+9. To test the REST API, go to http://127.0.0.1:5000/apidocs/
+10. Database GUI is available on http://localhost:5050/ 

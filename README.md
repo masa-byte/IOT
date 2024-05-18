@@ -35,3 +35,5 @@ It was written in **.NET Core** and **Flask**, and uses **PostgreSQL** as the da
 9. In order to test aggregation functions, use the provided calculate-secoonds.py script to get the seconds for the given time period
 10. To test the REST API, go to http://127.0.0.1:5000/apidocs/
 11. Database GUI is available on http://localhost:5050/ 
+    - Username: admin@gmail.com
+    - Password: 123
